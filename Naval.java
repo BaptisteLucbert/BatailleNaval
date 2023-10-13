@@ -44,9 +44,16 @@ public class Naval implements Rules {
             System.out.println();
         }
     }
-
+    /*
+     * Constuire un bateaux
+     */
     public void make() {
-        Random random = new Random();
-        // Fin V1
+        // Sélectioner Une coordoné random depuis le registre dans l'interface
+        Character Ligne = RegisterLigne[new Random().nextInt(RegisterLigne.length)] ;
+        Integer Colonne = RegisterColonne[new Random().nextInt(RegisterColonne.length)] ;
+        // Sélectioner si il est un axe X ou pas
+        Boolean isAxeX = new Random().nextBoolean() ;
+        // retour de la data direct
+        HashMap<Integer,Boolean> Origin = grill.get(Colonne) ;
     }
 }
