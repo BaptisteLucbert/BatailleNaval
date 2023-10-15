@@ -44,16 +44,65 @@ public class Naval implements Rules {
             System.out.println();
         }
     }
-    /*
-     * Constuire un bateaux
-     */
+    //Constuire un bateaux
     public void make() {
         // Sélectioner Une coordoné random depuis le registre dans l'interface
-        Character Ligne = RegisterLigne[new Random().nextInt(RegisterLigne.length)] ;
-        Integer Colonne = RegisterColonne[new Random().nextInt(RegisterColonne.length)] ;
+        Character Ligne = RegisterLigne[new Random().nextInt(RegisterLigne.length)] ; //C
+        Integer Colonne = RegisterColonne[new Random().nextInt(RegisterColonne.length)] ; //5
         // Sélectioner si il est un axe X ou pas
         Boolean isAxeX = new Random().nextBoolean() ;
         // retour de la data direct
-        HashMap<Integer,Boolean> Origin = grill.get(Colonne) ;
+        HashMap<Integer,Boolean> Origin = grill.get(Ligne) ;
+        // Sélection d'une taille de bateaux depuis l'interface
+        int size = TaillePossible[new Random().nextInt(TaillePossible.length)] ;
+        
+        switch(size) {
+            // Bateau de 2, 3, 4, 5 cases
+            case 2: case 3: case 4: case 5:
+                // On controle l'Axe X
+                if (isAxeX) {
+                    for (int i = 0; i < size; i++) {
+                        // Vérifier si la case existe ou pas
+                        if (Origin.get(Colonne + i) == null) {
+                            // Check si la case est vide et touche pas un autre bateau
+                            if (!Origin.get(Colonne + i).booleanValue()) {
+                                Origin.put(Colonne + i,true) ;
+                            }
+                        }
+                    }
+                }
+                // On controle l'Axe Y
+                if (!isAxeX) {
+                    for (int i = 0; i < size; i++) {
+                        // Vérifier si la case existe ou pas
+                        if (Origin.get(Ligne + i) == null) {
+                            // Check si la case est vide et touche pas un autre bateau
+                            if (!Origin.get(Ligne + i).booleanValue()) {
+                                Origin.put(Ligne + i,true) ;
+                            }
+                        }                       
+                    }
+                }
+            break;
+        }
+
+
+
+
+
+
+        // Etape 1 = selectioner un point d'origin 
+        /*
+        un Character
+        un Integer
+        */
+        //Etape 2 = SELECTION axe X OU Y
+        // Etpae 3 = SELECTION une taille de bateaux
+        // Etape 4 = calculer les possibilités ( algo selon les tailles)
+        /*
+        #NOTE : si la case est deja occuper, annuler le cas
+        */
+        // Etape 5 = APPLIQUER UN CAS RANDOM dans le hashmap
+        // Etape 6 = VERIFIER
     }
 }
